@@ -24,7 +24,7 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/:id", async (req, res, next) => {
+router.post("/:id", async (req, res, next) => {
   let id = req.params.id;
   try{
     let updatedNote = await Note.findByIdAndUpdate(id, req.body.note);
