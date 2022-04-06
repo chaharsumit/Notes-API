@@ -1,6 +1,6 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Note = require('../models/Note');
+const Note = require("../models/Note");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -15,7 +15,7 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-router.post("/addNotes", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
     let note = await Note.create(req.body.note);
     return res.status(201).json({ note: note.noteJSON() });
@@ -24,28 +24,24 @@ router.post("/addNotes", async (req, res, next) => {
   }
 });
 
-/* 
-
-router.put('/:id', (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   let id = req.params.id;
-  Note.findByIdAndUpdate(id, req.body, (err, note) => {
-    if(err){
-      return res.status(400).next(err);
-    }
-    return res.status(201).res.json({ note });
-  });
-})
+  try{
+    let updatedNote = await Note.findByIdAndUpdate(id, req.body.note);
+    return res.status(201).json({ message: "success" });
+  }catch(error){
+    return next(error);
+  }
+});
 
-router.delete("/:id", auth.verifyToken, async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   let id = req.params.id;
   try {
-    let deletednote = await note.findByIdAndDelete(id);
+    let deletednote = await Note.findByIdAndDelete(id);
     return res.status(201).json({ message: "success note deleted" });
   } catch (error) {
     return next(error);
   }
 });
-
-*/
 
 module.exports = router;
