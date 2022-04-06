@@ -34,7 +34,7 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.get("/:id/delete", async (req, res, next) => {
   let id = req.params.id;
   try {
     let deletednote = await Note.findByIdAndDelete(id);
