@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const notesSchema = new Schema({
+const noteSchema = new Schema({
   heading: { type: String, required: true },
   description: { type: String, required: true },
   date: { type: String, required: true },
@@ -17,6 +17,6 @@ noteSchema.methods.noteJSON = function(){
   }
 }
 
-const Note = mongoose.model('Note', notesSchema);
+const Note = mongoose.model('Note', noteSchema);
 
 module.exports = Note;
